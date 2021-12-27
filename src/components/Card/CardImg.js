@@ -1,10 +1,10 @@
 
-export default function CardImg(props){
+export default function CardImg({img, alt}){
     return (
         <>
             {
-                props.img &&
-                <img src={props.img}
+                img &&
+                <img src={img} alt={alt}
                     className="w-full h-full rounded-xl" />
             }
         </>

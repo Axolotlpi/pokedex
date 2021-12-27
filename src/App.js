@@ -60,7 +60,7 @@ function App() {
                   <div className="h-min" key={index}>
                     <CardShell>
                       <div className="w-6/12">
-                        <CardImg img={item.img} />
+                        <CardImg img={item.img} alt={item.name} />
                       </div>
                       <CardHeading heading={item.name}/>
                       <CardText text={item.description}/>
