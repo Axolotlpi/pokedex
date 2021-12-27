@@ -3,11 +3,18 @@ import { Pokedex } from 'pokeapi-js-wrapper';
 const poke = new Pokedex();
 
 export const fetchItems = async function(searchQuery){
-    return fitSchema( await fetchPokemon(searchQuery));
+    let result = await fetchPokemon(searchQuery);
+    console.log("items: ", result);
+    if('error' in result) {
+        console.log("returning error");
+        return result;
+    };
+    return fitSchema(result);
 }
 
 const fetchPokemon = async function(searchQuery){
     let result;
+    if(!searchQuery) return {error: '', message: 'No search query'};
     try {
         result = await poke.getPokemonByName(searchQuery);
     }
@@ -15,20 +22,17 @@ const fetchPokemon = async function(searchQuery){
         console.log(error);
         result = {error: error, message: 'There was a problem getting that item'};
     }
-    console.log(result)
+    console.log("fetch: ", result)
     return result;
 }
 
-const fitSchema = async function(result){
+const fitSchema = function(result){
     result = Array.isArray(result) ? result : [result];
-    return result.map(res => {
-        if(res.error){
-            return null;
-        }
-        return {
+    return result.map(res => 
+        ({
             name: res.name,
             description: res.species.name,
             img: res.sprites.front_default,
             id: res.id
-        }});
+        }));
 }
