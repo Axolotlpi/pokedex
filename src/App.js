@@ -8,6 +8,7 @@ import CardText from './components/Card/CardText';
 import SearchBar from "./components/SearchBar";
 import Button from "./components/Button";
 import { fetchItems } from "./helpers";
+import PokeCard from './compositions/PokeCard';
 
 function App() {
 
@@ -55,17 +56,10 @@ function App() {
 
         <div className="grid grid-flow-row grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 col-span-full row-start-4 p-5 gap-3">
           {
-            items && Array.isArray(items) && !items.error && items.map((item, index) =>  
+            items && Array.isArray(items) && !items.error && 
+            items.map((item, index) =>  
               item &&
-                <div className="h-min" key={index}>
-                  <CardShell>
-                    <div className="w-6/12">
-                      <CardImg img={item.img} alt={item.name} />
-                    </div>
-                    <CardHeading heading={item.name}/>
-                    <CardText text={item.description}/>
-                  </CardShell>
-                </div>     
+              <PokeCard {...item} key={index}/>
             )
           }
           </div>
