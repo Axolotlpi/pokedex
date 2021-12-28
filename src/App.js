@@ -44,11 +44,11 @@ function App() {
       <div className="grid grid-flow-row grid-cols-12">
         <Heading heading="PokeDex v0.1" />
 
-        <div className="col-span-10 col-start-2 lg:col-span-8 lg:col-start-2 m-3">
+        <div className="col-span-10 col-start-2 md:col-span-8 md:col-start-2 m-3">
           <SearchBar searchQuery={getItem} placeholder="search a pokemon"/>
         </div>
 
-        <div className=" row-start-3 col-start-4 col-span-6 lg:row-start-2 lg:col-start-11 lg:col-span-1 flex justify-center items-center">
+        <div className=" row-start-3 col-start-4 col-span-6 md:row-start-2 md:col-start-11 md:col-span-1 flex justify-center items-center">
           <Button text="Clear" click={resetItems} />
         </div>
 
