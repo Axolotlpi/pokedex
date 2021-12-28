@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Heading from './compositions/Heading';
-import SummaryCard from "./components/Card/SummaryCard";
+import NotifiactionCard from './compositions/NotificationCard';
 import CardShell from './components/Card/CardShell';
 import CardHeading from './components/Card/CardHeading';
 import CardImg from './components/Card/CardImg';
@@ -51,11 +51,7 @@ function App() {
           <Button text="Clear" click={resetItems} />
         </div>
 
-        {
-          message && <div className="fixed bottom-0 left-0">
-            <SummaryCard heading={message}/>
-          </div>
-        }
+        <NotifiactionCard message={message} />
 
         <div className="grid grid-flow-row grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 col-span-full row-start-4 p-5 gap-3">
           {
