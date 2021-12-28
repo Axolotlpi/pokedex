@@ -7,7 +7,7 @@ import CardImg from './components/Card/CardImg';
 import CardText from './components/Card/CardText';
 import SearchBar from "./components/SearchBar";
 import Button from "./components/Button";
-import { fetchItems } from "./helpers";
+import { fetchItem } from "./helpers";
 import PokeCard from './compositions/PokeCard';
 
 function App() {
@@ -15,19 +15,19 @@ function App() {
   const [items, setItems] = useState(null);
   const [message, setMessage] = useState('');
 
-  const getItems = async (query) => {
-    let results = await fetchItems(query);
+  const getItem = async (query) => {
+    let result = await fetchItem(query);
     let tempItems = items;
     
-    if('error' in results){
-      console.log(results)
-      notify(results.message);
+    if('error' in result){
+      console.log(result)
+      notify(result.message);
       return;
     }
 
     if(!tempItems) tempItems=[];
 
-    setItems([...tempItems, ...results]);    
+    setItems([...tempItems, result]);    
   }
 
   const resetItems = () => {
@@ -45,7 +45,7 @@ function App() {
         <Heading heading="PokeDex v0.1" />
 
         <div className="col-span-10 col-start-2 lg:col-span-8 lg:col-start-2 m-3">
-          <SearchBar searchQuery={getItems} placeholder="search a pokemon"/>
+          <SearchBar searchQuery={getItem} placeholder="search a pokemon"/>
         </div>
 
         <div className=" row-start-3 col-start-4 col-span-6 lg:row-start-2 lg:col-start-11 lg:col-span-1 flex justify-center items-center">

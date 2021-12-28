@@ -2,14 +2,12 @@ import { Pokedex } from 'pokeapi-js-wrapper';
 
 const poke = new Pokedex();
 
-export const fetchItems = async function(searchQuery){
-    let result = await fetchPokemon(searchQuery);
-    console.log("items: ", result);
-    if('error' in result) {
-        console.log("returning error");
-        return result;
-    };
-    return fitSchema(result);
+export const fetchItem = async function(searchQuery){
+    const pokemon = checkForError(
+        await fetchPokemon(searchQuery)
+    );
+
+    return fitSchema(pokemon);
 }
 
 const fetchPokemon = async function(searchQuery){
@@ -26,13 +24,33 @@ const fetchPokemon = async function(searchQuery){
     return result;
 }
 
-const fitSchema = function(result){
-    result = Array.isArray(result) ? result : [result];
-    return result.map(res => 
-        ({
-            name: res.name,
-            description: res.species.name,
-            img: res.sprites.front_default,
-            id: res.id
-        }));
+const fetchCharacteristic = async function(id){
+    let result;
+    if(!id) return {error: '', message: 'No id'};
+    try {
+        result = await poke.getCharacteristicById(id);
+    }
+    catch (error) {
+        console.log(error);
+        result = {error: error, message: 'There was a problem getting that item'};
+    }
+    console.log("fetch characteristic: ", result)
+    return result;
+}
+
+const fitSchema = async function(pokemon){
+    return ({
+        name: pokemon.name,
+        descriptions: pokemon.stats,
+        img: pokemon.sprites.front_default,
+        id: pokemon.id
+    });
+}
+
+const checkForError = function(result){
+    if(!result || 'error' in result) {
+        console.log('Error: ', result?.message ? result.message : 'no fetch result');
+        return result.message;
+    };
+    return result;
 }

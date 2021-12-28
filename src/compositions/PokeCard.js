@@ -3,7 +3,7 @@ import CardHeading from '../components/Card/CardHeading';
 import CardImg from '../components/Card/CardImg';
 import CardText from '../components/Card/CardText';
 
-export default function PokeCard({name, img, description}){
+export default function PokeCard({name, img, descriptions}){
     return (
         <div className="h-min">
             <CardShell>
@@ -11,7 +11,12 @@ export default function PokeCard({name, img, description}){
                 <CardImg img={img} alt={name} />
                 </div>
                 <CardHeading heading={name}/>
-                <CardText text={description}/>
+                {
+                    descriptions && Array.isArray(descriptions) &&
+                    descriptions.map(stat => 
+                            <CardText text={`${stat.stat.name}: ${stat.base_stat}`}/>
+                        )
+                }
             </CardShell>
         </div>     
     );
