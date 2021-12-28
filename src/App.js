@@ -1,10 +1,6 @@
 import { useState } from 'react';
 import Heading from './compositions/Heading';
 import NotifiactionCard from './compositions/NotificationCard';
-import CardShell from './components/Card/CardShell';
-import CardHeading from './components/Card/CardHeading';
-import CardImg from './components/Card/CardImg';
-import CardText from './components/Card/CardText';
 import SearchBar from "./components/SearchBar";
 import Button from "./components/Button";
 import { fetchItem, setListener} from "./helpers";
