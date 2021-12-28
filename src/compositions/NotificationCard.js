@@ -4,7 +4,7 @@ export default function NotifiactionCard({message}){
     return (
         <>
             {
-                message && <div className="fixed bottom-0 left-0">
+                message && <div className="fixed bottom-0 right-0">
                 <SummaryCard heading={message}/>
                 </div>
             }

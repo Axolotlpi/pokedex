@@ -7,7 +7,7 @@ import CardImg from './components/Card/CardImg';
 import CardText from './components/Card/CardText';
 import SearchBar from "./components/SearchBar";
 import Button from "./components/Button";
-import { fetchItem } from "./helpers";
+import { fetchItem, setListener} from "./helpers";
 import PokeCard from './compositions/PokeCard';
 
 function App() {
@@ -15,16 +15,18 @@ function App() {
   const [items, setItems] = useState(null);
   const [message, setMessage] = useState('');
 
+  const notify = (msg) => {
+    setMessage(msg);
+    setTimeout(() => setMessage(''), 3000);
+  }
+
+  setListener(notify);
+
   const getItem = async (query) => {
     let result = await fetchItem(query);
     let tempItems = items;
     
-    if('error' in result){
-      console.log(result)
-      notify(result.message);
-      return;
-    }
-
+    if(!result) result=[];
     if(!tempItems) tempItems=[];
 
     setItems([...tempItems, result]);    
@@ -32,11 +34,6 @@ function App() {
 
   const resetItems = () => {
     setItems(null);
-  }
-
-  const notify = (msg) => {
-    setMessage(msg);
-    setTimeout(() => setMessage(''), 3000);
   }
 
   return (
