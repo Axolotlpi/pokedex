@@ -27,22 +27,6 @@ const fetchPokemon = async function(searchQuery){
     return result;
 }
 
-const fetchCharacteristic = async function(id){
-    let result;
-    if(!id) {
-        notifyError('No characterstic id found');
-    };
-    try {
-        result = await poke.getCharacteristicById(id);
-    }
-    catch (error) {
-        console.log(error);
-        notifyError('Could not fetch the characteristic')
-    }
-    console.log("fetch characteristic: ", result)
-    return result;
-}
-
 const fitSchema = async function(pokemon){
     return ({
         name: pokemon.name,
