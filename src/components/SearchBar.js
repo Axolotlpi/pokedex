@@ -34,7 +34,7 @@ function SearchBar({ searchQuery, placeholder, autoCompleteArray }) {
       autoComplete="off"
       className="SearchBar w-full h-max flex flex-row justify-items-stretch font-sans font-semibold"
     >
-      <div class="relative flex-[7] bg-primary-0 flex rounded-l-md">
+      <div className="relative flex-[7] bg-primary-0 flex rounded-l-md">
         <input
           type="text"
           onChange={handleChange}
