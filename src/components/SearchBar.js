@@ -21,6 +21,13 @@ function SearchBar({ searchQuery, placeholder, autoCompleteArray }) {
     setSuggestion(suggest ? suggest : '');
   };
 
+  const tabComplete = (event) => {
+    if (event.keyCode !== 9) return;
+    if (!suggestion || !query || suggestion == query) return;
+    event.preventDefault();
+    setQuery(suggestion);
+  };
+
   return (
     <form
       onSubmit={onSubmit}
@@ -34,6 +41,7 @@ function SearchBar({ searchQuery, placeholder, autoCompleteArray }) {
           onChange={handleChange}
           value={query}
           onKeyUp={autoComplete}
+          onKeyDown={tabComplete}
           className="w-full bg-transparent z-10 placeholder:text-opacity-50 text-secondary-0 font-semibold p-2 rounded-l-md"
         />
 
