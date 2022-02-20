@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 function SearchBar({ searchQuery, placeholder, autoCompleteArray }) {
   const [query, setQuery] = useState('');
-  const [suggestion, setSuggestion] = useState('');
+  const [suggestion, setSuggestion] = useState(placeholder);
 
   const handleChange = (event) => {
     setQuery(event.target.value);
@@ -15,7 +15,7 @@ function SearchBar({ searchQuery, placeholder, autoCompleteArray }) {
   };
 
   const autoComplete = () => {
-    if (!autoCompleteArray || !query) return setSuggestion('');
+    if (!autoCompleteArray || !query) return setSuggestion(placeholder);
     const suggest = autoCompleteArray.find((word) => word.startsWith(query));
     console.log(suggest);
     setSuggestion(suggest ? suggest : '');
@@ -37,12 +37,11 @@ function SearchBar({ searchQuery, placeholder, autoCompleteArray }) {
       <div class="relative flex-[7] bg-primary-0 flex rounded-l-md">
         <input
           type="text"
-          placeholder={placeholder}
           onChange={handleChange}
           value={query}
           onKeyUp={autoComplete}
           onKeyDown={tabComplete}
-          className="w-full bg-transparent z-10 placeholder:text-opacity-50 text-secondary-0 font-semibold p-2 rounded-l-md"
+          className="w-full bg-transparent z-10 text-secondary-0 font-semibold p-2 rounded-l-md"
         />
 
         <input
