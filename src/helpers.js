@@ -2,14 +2,19 @@ import { Pokedex } from 'pokeapi-js-wrapper';
 
 const poke = new Pokedex();
 
-export const fetchItem = async function (searchQuery) {
-  return fitSchema(await fetchPokemon(searchQuery));
-};
-
 let errorListener;
 
-export const setListener = function (callback) {
+export const setErrorListener = function (callback) {
   errorListener = callback;
+};
+
+const notifyError = function (message) {
+  errorListener && errorListener(message);
+  console.log('Error: ', message);
+};
+
+export const fetchItem = async function (searchQuery) {
+  return fitSchema(await fetchPokemon(searchQuery));
 };
 
 const fetchPokemon = async function (searchQuery) {
@@ -27,15 +32,11 @@ const fetchPokemon = async function (searchQuery) {
 };
 
 const fitSchema = async function (pokemon) {
+  if (!pokemon) return null;
   return {
     name: pokemon.name,
     descriptions: pokemon.stats,
     img: pokemon.sprites.front_default,
     id: pokemon.id,
   };
-};
-
-const notifyError = function (message) {
-  errorListener && errorListener(message);
-  console.log('Error: ', message);
 };

@@ -3,11 +3,11 @@ import Heading from './compositions/Heading';
 import NotifiactionCard from './compositions/NotificationCard';
 import SearchBar from './components/SearchBar';
 import Button from './components/Button';
-import { fetchItem, setListener } from './helpers';
+import { fetchItem, setErrorListener } from './helpers';
 import PokeCard from './compositions/PokeCard';
 
 function App() {
-  const [items, setItems] = useState(null);
+  const [items, setItems] = useState([]);
   const [message, setMessage] = useState('');
 
   const notify = (msg) => {
@@ -15,14 +15,11 @@ function App() {
     setTimeout(() => setMessage(''), 3000);
   };
 
-  setListener(notify);
+  setErrorListener(notify);
 
   const getItem = async (query) => {
     let result = await fetchItem(query);
     let tempItems = items;
-
-    if (!result) result = [];
-    if (!tempItems) tempItems = [];
 
     setItems([...tempItems, result]);
   };
@@ -49,7 +46,6 @@ function App() {
         <div className="grid grid-flow-row grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 col-span-full row-start-4 p-5 gap-3">
           {items &&
             Array.isArray(items) &&
-            !items.error &&
             items.map(
               (item, index) => item && <PokeCard {...item} key={index} />
             )}
