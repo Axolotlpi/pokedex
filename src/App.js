@@ -5,6 +5,7 @@ import SearchBar from './components/SearchBar';
 import Button from './components/Button';
 import { fetchItem, setErrorListener } from './helpers';
 import PokeCard from './compositions/PokeCard';
+import autoComplete from './autoCompleteList.json';
 
 function App() {
   const [items, setItems] = useState([]);
@@ -34,7 +35,12 @@ function App() {
         <Heading heading="PokeDex v0.1" />
 
         <div className="col-span-10 col-start-2 md:col-span-8 md:col-start-2 m-3">
-          <SearchBar searchQuery={getItem} placeholder="search a pokemon" />
+          <SearchBar
+            searchQuery={getItem}
+            placeholder="search a pokemon"
+            autoCompleteArray={autoComplete.pokemon}
+            onlyLowerCase
+          />
         </div>
 
         <div className=" row-start-3 col-start-4 col-span-6 md:row-start-2 md:col-start-11 md:col-span-1 flex justify-center items-center">
