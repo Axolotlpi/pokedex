@@ -35,7 +35,11 @@ const fitSchema = async function (pokemon) {
   if (!pokemon) return null;
   return {
     name: pokemon.name,
-    descriptions: pokemon.stats,
+    descriptions: pokemon.stats.filter(
+      (desc) =>
+        desc.stat.name !== 'special-attack' &&
+        desc.stat.name !== 'special-defense'
+    ),
     img: pokemon.sprites.front_default,
     id: pokemon.id,
   };
