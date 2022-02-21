@@ -29,7 +29,7 @@ function SearchBar({
 
   const tabComplete = (event) => {
     if (event.keyCode !== 9) return;
-    if (!suggestion || !query || suggestion == query) return;
+    if (!suggestion || !query || suggestion === query) return;
     event.preventDefault();
     setQuery(suggestion);
   };
