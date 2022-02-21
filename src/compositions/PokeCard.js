@@ -14,7 +14,7 @@ export default function PokeCard({ name, img, descriptions }) {
         {descriptions &&
           Array.isArray(descriptions) &&
           descriptions.map((stat) => (
-            <CardText text={`${stat.stat.name}: ${stat.base_stat}`} />
+            <CardText text={`${stat.stat.name}: ${stat.stat.adjective}`} />
           ))}
       </CardShell>
     </div>

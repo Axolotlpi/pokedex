@@ -1,4 +1,5 @@
 import { Pokedex } from 'pokeapi-js-wrapper';
+import adjectives from './adjectives.json';
 
 const poke = new Pokedex();
 
@@ -14,7 +15,7 @@ const notifyError = function (message) {
 };
 
 export const fetchItem = async function (searchQuery) {
-  return fitSchema(await fetchPokemon(searchQuery));
+  return funify(fitSchema(await fetchPokemon(searchQuery)));
 };
 
 const fetchPokemon = async function (searchQuery) {
@@ -31,7 +32,7 @@ const fetchPokemon = async function (searchQuery) {
   return result;
 };
 
-const fitSchema = async function (pokemon) {
+const fitSchema = function (pokemon) {
   if (!pokemon) return null;
   return {
     name: pokemon.name,
@@ -44,3 +45,23 @@ const fitSchema = async function (pokemon) {
     id: pokemon.id,
   };
 };
+
+const statBreakpoints = [0, 25, 45, 85, 120];
+
+const funify = function (pokemon) {
+  if (!pokemon) return null;
+  let adjective;
+  pokemon.descriptions.map((desc) => {
+    let adjs = adjectives[desc.stat.name];
+    statBreakpoints.forEach((bp, i) => {
+      if (desc.base_stat > bp) {
+        const adjIndex = desc.base_stat % adjs[i].length;
+        adjective = adjs[i][adjIndex];
+      }
+    });
+    desc.stat.adjective = adjective;
+    return desc;
+  });
+  return pokemon;
+};
+//descriptions[1].stat.name and .base_stat
