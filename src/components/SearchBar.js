@@ -23,15 +23,13 @@ function SearchBar({
   };
 
   useEffect(() => {
-    autoHint();
-  }, [query]);
-
-  const autoHint = () => {
+    //auto hint
     if (!query) return setSuggestion(placeholder);
     if (!autoCompleteArray) return setSuggestion('');
+
     const suggest = autoCompleteArray.find((word) => word.startsWith(query));
-    setSuggestion(suggest ? suggest : '');
-  };
+    setSuggestion(suggest || '');
+  }, [query, placeholder, autoCompleteArray]);
 
   const autoComplete = (event) => {
     if (!autoCompleteKeys.includes(event.keyCode)) return;
