@@ -1,10 +1,16 @@
 import { useState } from 'react';
 
-function SearchBar({ searchQuery, placeholder, autoCompleteArray }) {
+function SearchBar({
+  searchQuery,
+  placeholder,
+  autoCompleteArray,
+  onlyLowerCase = false,
+}) {
   const [query, setQuery] = useState('');
   const [suggestion, setSuggestion] = useState(placeholder);
 
   const handleChange = (event) => {
+    if (onlyLowerCase) return setQuery(event.target.value.toLowerCase());
     setQuery(event.target.value);
   };
 
