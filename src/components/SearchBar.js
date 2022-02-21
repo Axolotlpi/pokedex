@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function SearchBar({
   searchQuery,
@@ -22,8 +22,13 @@ function SearchBar({
     setQuery('');
   };
 
+  useEffect(() => {
+    autoHint();
+  }, [query]);
+
   const autoHint = () => {
-    if (!autoCompleteArray || !query) return setSuggestion(placeholder);
+    if (!query) return setSuggestion(placeholder);
+    if (!autoCompleteArray) return setSuggestion('');
     const suggest = autoCompleteArray.find((word) => word.startsWith(query));
     setSuggestion(suggest ? suggest : '');
   };
@@ -46,7 +51,6 @@ function SearchBar({
           type="text"
           onChange={handleChange}
           value={query}
-          onKeyUp={autoHint}
           onKeyDown={autoComplete}
           className="w-full bg-transparent z-10 text-secondary-0 font-semibold p-2 rounded-l-md"
         />
