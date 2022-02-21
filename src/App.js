@@ -28,7 +28,7 @@ function App() {
   };
 
   return (
-    <div className="App w-screen h-full min-h-screen bg-primary-3">
+    <div className="App w-full h-full min-h-screen bg-primary-3">
       <div className="grid grid-flow-row grid-cols-12">
         <Heading heading="PokeDex v0.1" />
 
