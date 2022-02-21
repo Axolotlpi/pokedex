@@ -5,6 +5,7 @@ function SearchBar({
   placeholder,
   autoCompleteArray,
   onlyLowerCase = false,
+  trailingSpaces = false,
 }) {
   const [query, setQuery] = useState('');
   const [suggestion, setSuggestion] = useState(placeholder);
@@ -16,7 +17,7 @@ function SearchBar({
 
   const onSubmit = (event) => {
     event.preventDefault();
-    searchQuery(query);
+    searchQuery(trailingSpaces ? query : query.trim());
     setQuery('');
   };
 
