@@ -20,7 +20,7 @@ function App() {
 
   const getItem = async (query) => {
     let result = await fetchItem(query);
-    setItems([...items, result]);
+    setItems([...(items || []), result]);
   };
 
   const resetItems = () => {
