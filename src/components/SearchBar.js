@@ -6,6 +6,7 @@ function SearchBar({
   autoCompleteArray,
   onlyLowerCase = false,
   trailingSpaces = false,
+  autoCompleteKeys = [9],
 }) {
   const [query, setQuery] = useState('');
   const [suggestion, setSuggestion] = useState(placeholder);
@@ -21,14 +22,14 @@ function SearchBar({
     setQuery('');
   };
 
-  const autoComplete = () => {
+  const autoHint = () => {
     if (!autoCompleteArray || !query) return setSuggestion(placeholder);
     const suggest = autoCompleteArray.find((word) => word.startsWith(query));
     setSuggestion(suggest ? suggest : '');
   };
 
-  const tabComplete = (event) => {
-    if (event.keyCode !== 9) return;
+  const autoComplete = (event) => {
+    if (!autoCompleteKeys.includes(event.keyCode)) return;
     if (!suggestion || !query || suggestion === query) return;
     event.preventDefault();
     setQuery(suggestion);
@@ -45,8 +46,8 @@ function SearchBar({
           type="text"
           onChange={handleChange}
           value={query}
-          onKeyUp={autoComplete}
-          onKeyDown={tabComplete}
+          onKeyUp={autoHint}
+          onKeyDown={autoComplete}
           className="w-full bg-transparent z-10 text-secondary-0 font-semibold p-2 rounded-l-md"
         />
 

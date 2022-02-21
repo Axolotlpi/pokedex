@@ -38,6 +38,7 @@ function App() {
             placeholder="search a pokemon"
             autoCompleteArray={autoComplete.pokemon}
             onlyLowerCase
+            autoCompleteKeys={[9, 32]}
           />
         </div>
 
