@@ -23,7 +23,6 @@ function SearchBar({
   const autoComplete = () => {
     if (!autoCompleteArray || !query) return setSuggestion(placeholder);
     const suggest = autoCompleteArray.find((word) => word.startsWith(query));
-    console.log(suggest);
     setSuggestion(suggest ? suggest : '');
   };
 
