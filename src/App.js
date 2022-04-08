@@ -37,8 +37,7 @@ function App() {
             searchQuery={getItem}
             placeholder="search a pokemon"
             autoCompleteArray={autoComplete.pokemon}
-            onlyLowerCase
-            autoCompleteKeys={[9, 32]}
+            autoCompleteOnTap
           />
         </div>
 

@@ -1,76 +1,33 @@
 {
-    "health": [
-        [
-            "bird boned", "thin", "alive", "chihuaha", "sandwich-less"
-        ],
-        [
-            "skinny", "skips multivitamin", "wimpish", "lightweight"
-        ],
-        [
-            "meh", "pedestrian", "plain", "ok"
-        ],
-        [
-            "tough", "healthy", "beefy" 
-        ],
-        [
-            "jacked", "all the vitamins"
-        ]
+  "health": [
+    ["bird boned", "thin", "alive", "chihuaha", "sandwich-less"],
+    ["skinny", "skips multivitamin", "wimpish", "lightweight"],
+    ["meh", "pedestrian", "plain", "ok"],
+    ["tough", "healthy", "beefy"],
+    ["jacked", "all the vitamins"]
+  ],
 
-    ],
+  "attack": [
+    ["pillows", "barely"],
+    ["short", "tingles", "some"],
+    ["yes", "bruises", "ah"],
+    ["real", "scars", "wrecks"],
+    ["potent", "very much", "mucho grande"]
+  ],
 
-    "attack": [
-        [
-            "pillows", "barely"
-        ],
-        [
-            "short", "tingles",  "some"
-        ],
-        [
-            "yes", "bruises", "ah"
-        ],
-        [
-            "real", "scars", "wrecks"
-        ],
-        [
-            "potent", "very much", "mucho grande"
-        ]
+  "defense": [
+    ["no", "in vain", "diddly squat"],
+    ["lightweight", "lousy", "crumbs"],
+    ["just", "enough", "hhm hm"],
+    ["very", "yess"],
+    ["oh si", "heavyweight", "loads"]
+  ],
 
-    ],
-
-    "defense": [
-        [
-            "no", "in vain", "diddly squat"
-        ],
-        [
-            "lightweight", "lousy", "crumbs"
-        ],
-        [
-            "just", "enough", "hhm hm"
-        ],
-        [
-            "very", "yess"
-        ],
-        [
-            "oh si", "heavyweight", "loads"
-        ]
-
-    ],
-
-    "speed": [
-        [
-            "a tree", "eventually", "technically"
-        ],
-        [
-            "moves", "not a tree", "chill", "slowlier"
-        ],
-        [
-            "a cow", "sure", "decent"
-        ],
-        [
-            "motors", "high machs", "fast" 
-        ],
-        [
-            "the bees knees", "cooks yams", "motating", "mach Jesus"
-        ]
-    ]
-]
+  "speed": [
+    ["a tree", "eventually", "technically"],
+    ["moves", "not a tree", "chill", "slowlier"],
+    ["a cow", "sure", "decent"],
+    ["motors", "high machs", "fast"],
+    ["the bees knees", "cooks yams", "motating", "mach Jesus"]
+  ]
+}
