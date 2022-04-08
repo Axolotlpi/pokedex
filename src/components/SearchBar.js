@@ -1,18 +1,18 @@
 import { useState, useEffect } from 'react';
 
-function SearchBar({
+const SearchBar = ({
   searchQuery,
-  placeholder,
-  autoCompleteArray,
-  onlyLowerCase = false,
+  placeholder = '',
+  autoCompleteArray = [],
   trailingSpaces = false,
-  autoCompleteKeys = [9],
-}) {
+  autoCompleteKeys = ['Tab'],
+  autoCompleteOnTap = true,
+}) => {
   const [query, setQuery] = useState('');
-  const [suggestion, setSuggestion] = useState(placeholder);
+  const [suggestion, setSuggestion] = useState('');
+  const [hint, setHint] = useState(placeholder);
 
   const handleChange = (event) => {
-    if (onlyLowerCase) return setQuery(event.target.value.toLowerCase());
     setQuery(event.target.value);
   };
 
@@ -23,26 +23,39 @@ function SearchBar({
   };
 
   useEffect(() => {
-    //auto hint
-    if (!query) return setSuggestion(placeholder);
+    //derive hint from suggestion
+    let tempSuggest = suggestion;
+    const suggestLength = tempSuggest.length || 0;
+    tempSuggest = tempSuggest.slice(query.length);
+    tempSuggest = tempSuggest.padStart(suggestLength, ' ');
+    setHint(tempSuggest);
+  }, [suggestion, query]);
+
+  useEffect(() => {
+    //find suggestion from autoCompleteArray
+    if (!query) return setSuggestion('');
     if (!autoCompleteArray) return setSuggestion('');
 
-    const suggest = autoCompleteArray.find((word) => word.startsWith(query));
+    let suggest = autoCompleteArray.find((word) =>
+      word.toLocaleLowerCase().startsWith(query.toLowerCase())
+    );
+
     setSuggestion(suggest || '');
-  }, [query, placeholder, autoCompleteArray]);
+  }, [query, autoCompleteArray]);
 
   const autoComplete = (event) => {
-    if (!autoCompleteKeys.includes(event.keyCode)) return;
-    if (!suggestion || !query || suggestion === query) return;
+    if (!('key' in event) && !autoCompleteOnTap) return;
+    if ('key' in event && !autoCompleteKeys.includes(event.key)) return;
+    if (!suggestion || !query) return;
     event.preventDefault();
-    setQuery(suggestion);
+    setQuery(suggestion || '');
   };
 
   return (
     <form
       onSubmit={onSubmit}
       autoComplete="off"
-      className="SearchBar w-full h-max flex flex-row justify-items-stretch font-sans font-semibold"
+      className="SearchBar w-full h-max flex flex-row justify-items-stretch font-mono"
     >
       <div className="relative flex-[7] bg-primary-0 flex rounded-l-md">
         <input
@@ -50,15 +63,16 @@ function SearchBar({
           onChange={handleChange}
           value={query}
           onKeyDown={autoComplete}
-          className="w-full bg-transparent z-10 text-secondary-0 font-semibold p-2 rounded-l-md"
+          onTouchEnd={autoComplete}
+          className="w-full bg-transparent z-10 text-secondary-0 p-2 rounded-l-md"
         />
 
         <input
           type="text"
-          value={suggestion}
+          value={hint}
           readOnly
           disabled
-          className="absolute w-full bg-transparent pointer-events-none text-opacity-50 text-secondary-0 font-semibold p-2 rounded-l-md"
+          className="absolute w-full bg-transparent pointer-events-none text-opacity-50 text-secondary-0 p-2 rounded-l-md"
         />
       </div>
 
@@ -67,6 +81,6 @@ function SearchBar({
       </button>
     </form>
   );
-}
+};
 
 export default SearchBar;
