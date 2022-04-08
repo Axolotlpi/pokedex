@@ -18,8 +18,9 @@ module.exports = {
         'secondary-2': '#FF3333',
       },
       fontFamily: {
-        sans: ['Arial', 'sans-serif'],
+        sans: ['Verdana', 'sans-serif'],
         serif: ['Merriweather', 'serif'],
+        mono: ['Courier New', 'monospace'],
       },
     },
   },
